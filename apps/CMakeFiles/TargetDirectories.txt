@@ -1,0 +1,5 @@
+/home/hb/cpp/cs144/minnow/apps/CMakeFiles/stream_copy.dir
+/home/hb/cpp/cs144/minnow/apps/CMakeFiles/webget.dir
+/home/hb/cpp/cs144/minnow/apps/CMakeFiles/tcp_native.dir
+/home/hb/cpp/cs144/minnow/apps/CMakeFiles/edit_cache.dir
+/home/hb/cpp/cs144/minnow/apps/CMakeFiles/rebuild_cache.dir

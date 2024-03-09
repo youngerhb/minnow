@@ -1,7 +1,7 @@
 #include "bidirectional_stream_copy.hh"
 
-#include "byte_stream.hh"
-#include "eventloop.hh"
+#include "../src/byte_stream.hh"
+#include "../util/eventloop.hh"
 
 #include <algorithm>
 #include <iostream>
