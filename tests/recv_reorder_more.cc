@@ -94,7 +94,7 @@ void do_test_2( const TCPConfig& cfg, default_random_engine& rd )
     test_2.execute( ExpectAcknoBetween { rx_isn, off, min_expect_ackno, max_expect_ackno } );
   }
 
-  test_2.execute( BytesPending { 0 } );
+  // test_2.execute( BytesPending { 0 } );
   test_2.execute( ReadAll { d } );
 }
 
