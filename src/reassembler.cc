@@ -1,5 +1,4 @@
 #include "reassembler.hh"
-#include <iostream>
 #include <map>
 #include <string>
 using namespace std;
@@ -9,11 +8,7 @@ void Reassembler::insert( uint64_t first_index, string data, bool is_last_substr
   // Your code here.
   auto& writer = output_.writer();
   size_ = writer.available_capacity();
-  // cout << "===========" << endl;
-  // cout << "size_: " << size_ << endl;
-  // cout << "cuurent : " << current_ << endl;
-  // cout << "data: " << data << endl;
-  // cout << "map_size: " << map_.size() << endl;
+
   if ( is_last_substring )
     max_size = first_index + data.size();
 
@@ -94,11 +89,6 @@ uint64_t Reassembler::bytes_pending() const
         map_size += itel.second.size() - end + itel.first -1;
       end = itel.first  + itel.second.size()-1;
     }
-    cout<<"========"<<endl;
-    cout<<"data: "<<itel.second<<endl;
-    cout<<"first: "<<itel.first<<endl;
-    cout<<"end: "<<end<<endl;
-    cout<<"map_size: "<<map_size<<endl;
   }
   return map_size;
 }
