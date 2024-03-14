@@ -10,9 +10,7 @@ void TCPReceiver::receive( TCPSenderMessage message )
     ackno = message.seqno + 1;
     is_connect_ = true;
   }
-  if ( message.RST )
-    {RST_ = true;
-    cout<<"ADADAD"<<endl;}
+
   if ( is_connect_ ) {
     uint64_t first_index = message.seqno.unwrap( zero_point_, checkpoint_ );
     first_index = ( first_index == 0 && message.SYN )

@@ -10,13 +10,29 @@
 #include <memory>
 #include <optional>
 #include <queue>
+#include <string>
 
 class TCPSender
 {
 public:
   /* Construct TCP sender with given default Retransmission Timeout and possible ISN */
   TCPSender( ByteStream&& input, Wrap32 isn, uint64_t initial_RTO_ms )
-    : input_( std::move( input ) ), isn_( isn ), initial_RTO_ms_( initial_RTO_ms )
+    : input_( std::move( input ) )
+    , isn_( isn )
+    , writer_( writer() )
+    , reader_( reader() )
+    , initial_RTO_ms_( initial_RTO_ms )
+    , RTO_ms_( initial_RTO_ms_ )
+    , windows_size_( 1 )
+    , current_(0)
+    , SYN_(false);
+    , FIN_(false);
+    , RST_(false);
+    , current_time_(0);
+    , que_front_no_( 0 )
+    , counts_retransmissions_(0)
+    , msg_que_({})
+    , time_que_({})
   {}
 
   /* Generate an empty TCPSenderMessage */
@@ -47,5 +63,20 @@ private:
   // Variables initialized in constructor
   ByteStream input_;
   Wrap32 isn_;
+  Writer& writer_;
+  Reader& reader_;
+
   uint64_t initial_RTO_ms_;
+  uint64_t RTO_ms_;
+
+  uint64_t windows_size_;
+  uint64_t current_; 
+  bool SYN_;
+  bool FIN_;
+  bool RST_;
+  uint64_t current_time_
+  uint64_t que_front_no_;
+  uint64_t counts_retransmissions_;
+  queue<TCPSenderMessage> msg_que_;
+  queue<uint64_t> time_que_;
 };
