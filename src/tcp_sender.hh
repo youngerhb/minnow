@@ -19,20 +19,17 @@ public:
   TCPSender( ByteStream&& input, Wrap32 isn, uint64_t initial_RTO_ms )
     : input_( std::move( input ) )
     , isn_( isn )
-    , writer_( writer() )
-    , reader_( reader() )
+    , reader_( input_.reader() ) // 成员函数const Writer& writer() const { return input_.writer(); }
     , initial_RTO_ms_( initial_RTO_ms )
     , RTO_ms_( initial_RTO_ms_ )
     , windows_size_( 1 )
     , current_(0)
-    , SYN_(false);
-    , FIN_(false);
-    , RST_(false);
-    , current_time_(0);
+    , SYN_(false)
+    , FIN_(false)
+    , RST_(false)
+    , current_time_(0)
     , que_front_no_( 0 )
     , counts_retransmissions_(0)
-    , msg_que_({})
-    , time_que_({})
   {}
 
   /* Generate an empty TCPSenderMessage */
@@ -63,7 +60,6 @@ private:
   // Variables initialized in constructor
   ByteStream input_;
   Wrap32 isn_;
-  Writer& writer_;
   Reader& reader_;
 
   uint64_t initial_RTO_ms_;
@@ -74,7 +70,7 @@ private:
   bool SYN_;
   bool FIN_;
   bool RST_;
-  uint64_t current_time_
+  uint64_t current_time_;
   uint64_t que_front_no_;
   uint64_t counts_retransmissions_;
   queue<TCPSenderMessage> msg_que_;
